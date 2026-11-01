@@ -24,6 +24,8 @@ def download_with_progress(url: str, target_dir: str, progress: Callable[[float]
 
     Only .gz and .zip files are allowed
     """
+    # UAT-only build: never transmit data or credentials from the restored test copy.
+    raise RuntimeError('Outbound KSA requests are disabled on the UAT bench')
     logger = _get_logger()
     try:
         with requests.get(url, stream=True) as response:

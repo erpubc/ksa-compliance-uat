@@ -42,6 +42,8 @@ def get_feedback_settings():
 @frappe.whitelist()
 def send_feedback_email(company: str, subject: str, description: str, attachments: str = None):
     """Send feedback email using the default email account"""
+    # UAT-only build: never transmit data or credentials from the restored test copy.
+    raise RuntimeError('Outbound KSA requests are disabled on the UAT bench')
     try:
         config = get_feedback_settings()
 

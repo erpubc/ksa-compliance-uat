@@ -220,6 +220,8 @@ def api_call(
 
     Never throws an exception
     """
+    # UAT-only build: never transmit data or credentials from the restored test copy.
+    raise RuntimeError('Outbound KSA requests are disabled on the UAT bench')
     if not server.endswith('/'):
         server = server + '/'
 
